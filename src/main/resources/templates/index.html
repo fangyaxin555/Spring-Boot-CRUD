@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+    /**
+    * 实际应用时，里边的参数应根据实际而改变，而不是写死的，
+    * 这里仅仅①简单地模拟前后端，②简单测试接口
+    *
+    */
+    function del() {
+    	 $.ajax({
+         	url:"http://localhost:8080/user/delete/2",
+         	type:"POST",
+         	data:{_method:"DELETE"},
+         	dataType:"json",
+         	async : true,
+        	success:function(result){
+        		alert("删除成功");
+        		window.location.href=('http://localhost:8080/user/findAll');
+    		}
+            });
+    }
+
+    function upd() {
+        $.ajax({
+            type : "put",
+            data:"id=3&name=cun&age=15",
+            url : "http://localhost:8080/user/update",
+            async : true,
+        	success:function(result){
+        		alert("更新成功");
+        		window.location.href=('http://localhost:8080/user/findAll');
+    		}
+        });
+    }
+</script>
+</head>
+<body>
+    <!-- 删除 -->
+    <button id="btn" onclick="del()">delete request</button>
+
+    <!-- 更新 -->
+    <button id="btn2" onclick="upd()">update request</button>
+
+    <!-- 增加 -->
+    <form action="http://localhost:8080/user/address" method="post">
+        id<input type="text" name="id" /> 
+        name<input type="text" name="name" />
+        age<input type="text" name="age" />  
+        <input type="submit" value="submit" />
+    </form>
+
+    <!-- 查询 -->
+    <a href="http://localhost:8080/user/findAll">select request</a>
+</body>
+</html>
